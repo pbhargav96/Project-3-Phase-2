@@ -16,7 +16,7 @@ To install: ````pip install pygame````
 
 ## Steps to run the program:
 Change the directory on terminal using cd to the file location.
-Download the repo from GitHub: https://github.com/pbhargav96/Project-3-Phase-2
+Download the repository from GitHub: https://github.com/pbhargav96/Project-3-Phase-2
 
 Running the point robot file: 
 `````
