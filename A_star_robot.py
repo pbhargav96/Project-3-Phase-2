@@ -317,7 +317,7 @@ def AStar_Algo(start,goal,img,crad):
                     new_node.cost = n[1]+new_node.parent.cost + CostToGoal(n[0],goal)
                     visited.append(new_node.state)
                     Q.append(new_node)
-                    print(len(visited))
+#                     print(len(visited))
                 else:
                     node_id = find_node(new_node,Q)
 
