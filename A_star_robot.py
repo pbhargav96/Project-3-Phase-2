@@ -307,7 +307,7 @@ def AStar_Algo(start,goal,img,crad):
                 if math.sqrt((n[0][0] - goal[0])**2+(n[0][1] - goal[1])**2) <= 3:
                     print("Goal Reached")
                     return new_node,img,visited
-                
+
                 #To increase speed of simualtion, setting a threshold value to limit the nodes considered
                 dist = math.inf
                 for nodes in visited:
@@ -344,9 +344,6 @@ def main():
     xi=int(input("x =  "))
     yi=int(input("y =  "))
     o_i=int(input("Orientation = "))
-    if o_i%30 != 0:
-        print("please enter orientation that is multiple of 30")
-        break
     start=[xi,200-yi,o_i]
     print("Enter the goal node coordinates")
     xg=int(input("x =  "))
