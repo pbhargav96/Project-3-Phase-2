@@ -4,8 +4,6 @@ import math
 import pygame
 from pygame.locals import QUIT, MOUSEBUTTONUP
 import matplotlib.pyplot as plt
-from matplotlib.path import Path
-import matplotlib.patches as patches
 import cv2
 
 step=10
@@ -15,105 +13,7 @@ class Nodes:
         self.state = state
         self.cost = math.inf
         self.parent = None
-'''
-def coll_circle(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    location = np.sqrt((p_x -225)**2+(p_y -50)**2) - (25+crad)
-    if location < 0:
-        return True
-    else:
-        return False
 
-def coll_ellipse(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    center = [150,100]
-    location = ((float(p_x)-150)**2/(40+crad)**2) + ((float(p_y)-100)**2/(20+crad)**2) -1.0
-    if location < 0:
-        return True
-    else:
-        return False
-
-def coll_rhom(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    m_1,c_1 = -0.6,295.0
-    m_2,c_2 = 0.6,55.0
-    m_3,c_3 = -0.6,325.0
-    m_4,c_4 = 0.6,25.0
-
-    if p_y - p_x*m_1>(c_1-crad*math.cos(math.atan(m_1))) and p_y - p_x*m_2<(c_2+crad*math.cos(math.atan(m_2)))\
-    and p_y - p_x*m_3<(c_3+crad*math.cos(math.atan(m_3))) and p_y - p_x*m_4>(c_4-crad*math.cos(math.atan(m_4))):
-        return True
-    else:
-        return False
-
-def coll_rect(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    m_1,c_1 = -1.6,322.0
-    m_2,c_2 = 0.578125,104.1875
-    m_3,c_3 = -1.6,182.6
-    m_4,c_4 = 0.578125,115.078125
-
-    if p_y - p_x*m_1<(c_1+crad*math.cos(math.atan(m_1))) and p_y - p_x*m_2>(c_2-crad*math.cos(math.atan(m_2))) and p_y - p_x*m_3>(c_3-crad*math.cos(math.atan(m_3)))\
-    and p_y - p_x*m_4<(c_4+crad*math.cos(math.atan(m_4))):
-        return True
-    else:
-        return False
-
-def coll_poly1(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    m_1,c_1 = -1.0,100.0
-    m_2,c_2 = 1.2,-10.0
-    m_3,c_3 = -1.2,170.0
-    m_4,c_4 = 1.4,-90.0
-    m_5,c_5 = 0.0,15.0
-    m_6,c_6 = -13.0,340.0
-
-    if p_y - p_x*m_1>(c_1+crad*math.cos(math.atan(m_1))) and p_y - p_x*m_2<(c_2+crad*math.cos(math.atan(m_2)))\
-    and p_y - p_x*m_3<(c_3+crad*math.cos(math.atan(m_3))) and p_y - p_x*m_4>(c_4-crad*math.cos(math.atan(m_4))) and p_y - p_x*m_5>(c_5-crad*math.cos(math.atan(m_5)))\
-    and p_y - p_x*m_6>(c_6-crad*math.cos(math.atan(m_6))):
-        return True
-    else:
-        return False
-
-def coll_poly2(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    m_1,c_1 = -1.0,100.0
-    m_2,c_2 = 1.2,-10.0
-    m_3,c_3 = -1.2,170.0
-    m_4,c_4 = 1.4,-90.0
-    m_5,c_5 = 0.0,15.0
-    m_6,c_6 = -13.0,340.0
-
-    if p_y - p_x*m_1<=(c_1+crad*math.cos(math.atan(m_1))) and p_y - p_x*m_2<(c_2+crad*math.cos(math.atan(m_2)))\
-    and p_y - p_x*m_3<(c_3-crad*math.cos(math.atan(m_3))) and p_y - p_x*m_4>(c_4-crad*math.cos(math.atan(m_4)))\
-    and p_y - p_x*m_5>(c_5-crad*math.cos(math.atan(m_5))) and p_y - p_x*m_6>(c_6-crad*math.cos(math.atan(m_6))):
-        return True
-    else:
-        return False
-
-def coll_poly3(position,crad):
-    p_x = position[1]
-    p_y = position[0]
-    m_1,c_1 = -1.0,100.0
-    m_2,c_2 = 1.2,-10.0
-    m_3,c_3 = -1.2,170.0
-    m_4,c_4 = 1.4,-90.0
-    m_5,c_5 = 0.0,15.0
-    m_6,c_6 = -13.0,340.0
-
-    if p_y - p_x*m_1<=(c_1+crad*math.cos(math.atan(m_1))) and p_y - p_x*m_2>=(c_2+crad*math.cos(math.atan(m_2)))\
-    and p_y - p_x*m_3<(c_3-crad*math.cos(math.atan(m_3))) and p_y - p_x*m_4>(c_4+crad*math.cos(math.atan(m_4)))\
-    and p_y - p_x*m_5>(c_5-crad*math.cos(math.atan(m_5))) and p_y - p_x*m_6>(c_6+crad*math.cos(math.atan(m_6))):
-        return True
-    else:
-        return False
-        '''
 
 # To check if the new point lies in the circle obstacle
 def coll_circle(position,crad):
@@ -377,12 +277,6 @@ def track_back(node):
         p.append(parent)
         parent = parent.parent
     return p
-'''
-def color_pixel(image_color, point):
-    #print(point)
-    image_color[point[1], point[0]] = [255,0,255]
-    return image_color
- '''
 
 def CostToGoal(point,goal):
     xp = point[0]
@@ -413,7 +307,8 @@ def AStar_Algo(start,goal,img,crad):
                 if math.sqrt((n[0][0] - goal[0])**2+(n[0][1] - goal[1])**2) <= 3:
                     print("Goal Reached")
                     return new_node,img,visited
-
+                
+                #To increase speed of simualtion, setting a threshold value to limit the nodes considered
                 dist = math.inf
                 for nodes in visited:
                     dist = min(dist, math.sqrt((n[0][0] - nodes[0])**2+(n[0][1] - nodes[1])**2))
@@ -437,66 +332,6 @@ def AStar_Algo(start,goal,img,crad):
     return None,None,None
 
 
-# def plot_workspace(xi,yi,xg,yg):
-#     fig, ax = plt.subplots()
-#
-#
-#     verts2=[(95,200-170),(30.5,200-132.5),(35.5,200-123.9),(100,200-161.4),(95,200-170)]
-#     codes2 = [
-#         Path.MOVETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.CLOSEPOLY,
-#     ]
-#     path2 = Path(verts2, codes2)
-#     patch2 = patches.PathPatch(path2, facecolor='red', lw=0)
-#     ax.add_patch(patch2)
-#
-#     verts3=[(225,200-190),(200,200-175),(225,200-160),(250,200-175),(225,200-190)]
-#     codes3 = [
-#         Path.MOVETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.CLOSEPOLY,
-#     ]
-#     path3 = Path(verts3, codes3)
-#     patch3 = patches.PathPatch(path3, facecolor='red', lw=0)
-#     ax.add_patch(patch3)
-#
-#     verts4=[(20,200-80),(25,200-15),(75,200-15),(50,200-50),(20,200-80)]
-#     codes4 = [
-#         Path.MOVETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.CLOSEPOLY,
-#     ]
-#     path4 = Path(verts4, codes4)
-#     patch4 = patches.PathPatch(path4, facecolor='red', lw=0)
-#     ax.add_patch(patch4)
-#
-#     verts5=[(50,200-50),(75,200-15),(100,200-50),(75,200-80),(50,200-50)]
-#     codes5 = [
-#         Path.MOVETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.LINETO,
-#         Path.CLOSEPOLY,
-#     ]
-#     path5 = Path(verts5, codes5)
-#     patch5 = patches.PathPatch(path5, facecolor='red', lw=0)
-#     ax.add_patch(patch5)
-#
-#     ax.add_patch(patches.Circle((225, 200-50), radius=25, color='red', lw=2))
-#     ax.add_patch(patches.Ellipse((150, 200-100), 80, 40, 0, color='red', lw=2))
-#
-#     ax.set_xlim(0, 300)
-#     ax.set_ylim(0, 200)
-#     return fig,ax
-
-
 #
 # class Robot:
 #     def __init__(self, crad, int_pos, final_pos):
@@ -509,6 +344,9 @@ def main():
     xi=int(input("x =  "))
     yi=int(input("y =  "))
     o_i=int(input("Orientation = "))
+    if o_i%30 != 0:
+        print("please enter orientation that is multiple of 30")
+        break
     start=[xi,200-yi,o_i]
     print("Enter the goal node coordinates")
     xg=int(input("x =  "))
@@ -521,7 +359,7 @@ def main():
     crader = cl + rad
     step = 10
 
-
+    #To check if the goal and start are in the obstacle space and if they are viable points
     if coll_check(goal,crader) or coll_check(start,crader):
         print("Start or goal nodes lie in the obstacle space")
         exit()
