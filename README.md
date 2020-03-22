@@ -3,16 +3,17 @@
 ## A* Algorithm Implementation
 
 ## Authors:
+
 Amoghvarsha Prasanna
+
 Prateek Bhargava
 
 In this project the A* algorithm has been implemented on a rigid robot.
 
 ## External Dependencies:
 pygame:
-To install:
-````pip install pygame
-````
+To install: ````pip install pygame````
+
 ## Steps to run the program:
 Change the directory on terminal using cd to the file location.
 Download the repo from GitHub: https://github.com/pbhargav96/Project-3-Phase-2
